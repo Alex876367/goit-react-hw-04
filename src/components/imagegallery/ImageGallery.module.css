@@ -1,20 +1,9 @@
-.imageList {
+.gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-
-  align-items: center;
-  justify-content: center;
+  gap: 24px;
+  margin-bottom: 32px;
 }
-
-.imageItem {
-  border-radius: 5px;
-  overflow: hidden;
-
-  transition: transform 250ms linear, box-shadow 250ms linear;
-}
-
-.imageItem:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 121px -14px #68c5cc;
+.gallerycard {
+  width: calc((100% - 72px) / 4);
 }

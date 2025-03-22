@@ -1,11 +1,19 @@
-import style from "./ImageModal.module.css";
+import Modal from "react-modal";
+import css from "./ImageModal.module.css";
 
-const ImageModal = ({ modalImage }) => {
+const ImageModal = ({ modalIsOpen, closeModal, src, alt }) => {
   return (
-    <div className={style.backdrop}>
-      {/* <p>{modalImage.id}</p> */}
-      <img className={style.modalImage} src={modalImage.urls.full} alt="" />
-    </div>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      className={css.modal}
+      overlayClassName={css.overlay}
+    >
+      <div>
+        <img className={css.modalImg} src={src} alt={alt} />
+        <p className={css.gallerytitle}>{alt}</p>
+      </div>
+    </Modal>
   );
 };
 

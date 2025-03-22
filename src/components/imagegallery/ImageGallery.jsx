@@ -1,25 +1,18 @@
-import style from "./ImageGallery.module.css";
-import ImageCard from "../imagecard/ImageCard";
+import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-const ImageGallery = ({ galleryArr, openModal }) => {
+const ImageGallery = ({ gallery, openModal, updateModalStateData }) => {
   return (
-    <ul className={style.imageList}>
-      <AnimatePresence mode="popLayout">
-        {galleryArr.map((element) => (
-          <motion.li
-            className={style.imageItem}
-            key={element.id}
-            onClick={() => openModal(element)}
-            layout
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.4 }}
-          >
-            <ImageCard data={element} />
-          </motion.li>
-        ))}
-      </AnimatePresence>
+    <ul className={css.gallery}>
+      {gallery.map(({ id, alt_description, urls }) => (
+        <li className={css.gallerycard} key={id} onClick={openModal}>
+          <ImageCard
+            urls={urls}
+            alt_description={alt_description}
+            updateModalStateData={updateModalStateData}
+          />
+        </li>
+      ))}
     </ul>
   );
 };

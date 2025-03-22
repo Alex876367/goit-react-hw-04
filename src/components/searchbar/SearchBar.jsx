@@ -1,53 +1,35 @@
-import style from "./SearchBar.module.css";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { Field, Form, Formik } from "formik";
 
-import { motion } from "framer-motion";
+import css from "./SearchBar.module.css";
 
-import { FiSearch } from "react-icons/fi";
+const initialValues = { query: "" };
 
-const SearchBar = ({ onSearch }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const form = event.target;
-    const input = form.elements.galleryUserQuery;
-
-    if (input.value.trim() === "") {
-      // alert("Please enter something!");
-      toast("Please enter something!", {
-        icon: "📌",
-      });
-      return;
-    }
-
-    onSearch(input.value);
-    form.reset();
-  };
-
+const SearchBar = ({ onSubmit }) => {
   return (
-    <motion.div
-      className={style.headerWrapper}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 0 }}
-      transition={{ duration: 0.6 }}
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values, actions) => {
+        if (!values.query) {
+          toast.error("Please enter the value in the search field");
+          return;
+        }
+        onSubmit(values.query);
+        actions.resetForm();
+      }}
     >
-      <form className={style.formWrapper} onSubmit={handleSubmit}>
-        <input
-          className={style.userInput}
-          name="galleryUserQuery"
-          type="text"
+      <Form className={css.searchform}>
+        <Field
+          className={css.searchInput}
+          name="query"
+          type="search"
           autoComplete="off"
-          maxLength="30"
-          placeholder="Images..."
+          autoFocus
+          placeholder="Search images and photos"
         />
-        <FiSearch className={style.searchIcon} />
-        <button className={style.searchBtn} type="submit">
-          Search
-        </button>
-      </form>
-      <Toaster position="top-right" reverseOrder={false} />
-    </motion.div>
+        <button type="submit">Search</button>
+      </Form>
+    </Formik>
   );
 };
 
