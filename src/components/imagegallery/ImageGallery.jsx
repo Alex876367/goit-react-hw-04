@@ -1,20 +1,28 @@
-import ImageCard from "../ImageCard/ImageCard";
-import css from "./ImageGallery.module.css";
+import ImageCard from "../imageCard/ImageCard";
+import styles from "./ImageGallery.module.css";
+import LoadMoreBtn from "../loadMoreBtn/LoadMoreBtn";
 
-const ImageGallery = ({ gallery, openModal, updateModalStateData }) => {
+export default function ImageGallery({
+  images,
+  page,
+  total,
+  handleLoadMore,
+  handleOpenModal
+}) {
   return (
-    <ul className={css.gallery}>
-      {gallery.map(({ id, alt_description, urls }) => (
-        <li className={css.gallerycard} key={id} onClick={openModal}>
-          <ImageCard
-            urls={urls}
-            alt_description={alt_description}
-            updateModalStateData={updateModalStateData}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={styles.list}>
+        {images.map((el) => (
+          <li
+            key={el.id}
+            className={styles.item}
+            onClick={() => handleOpenModal(el)}
+          >
+            <ImageCard src={el.urls.small} alt={el.alt_description} />
+          </li>
+        ))}
+      </ul>
+      {page !== total && <LoadMoreBtn heandleClick={handleLoadMore} />}
+    </>
   );
-};
-
-export default ImageGallery;
+}
