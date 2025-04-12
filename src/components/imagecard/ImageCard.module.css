@@ -1,10 +1,8 @@
-.wrapper {
-  width: 100%;
-  height: 100%;
+.imgWrapper {
+  overflow: hidden;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.imgGallery {
+  width: 400px;
+  height: 250px;
 }

@@ -1,28 +1,27 @@
-import ImageCard from "../imageCard/ImageCard";
-import styles from "./ImageGallery.module.css";
-import LoadMoreBtn from "../loadMoreBtn/LoadMoreBtn";
+import style from "./ImageGallery.module.css";
+import ImageCard from "../imagecard/ImageCard";
 
-export default function ImageGallery({
-  images,
-  page,
-  total,
-  handleLoadMore,
-  handleOpenModal
-}) {
+import { motion, AnimatePresence } from "framer-motion";
+
+const ImageGallery = ({ galleryArr, openModal }) => {
   return (
-    <>
-      <ul className={styles.list}>
-        {images.map((el) => (
-          <li
-            key={el.id}
-            className={styles.item}
-            onClick={() => handleOpenModal(el)}
+    <ul className={style.imageList}>
+      <AnimatePresence mode="popLayout">
+        {galleryArr.map((element) => (
+          <motion.li
+            className={style.imageItem}
+            key={element.id}
+            onClick={() => openModal(element)}
+            layout
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.4 }}
           >
-            <ImageCard src={el.urls.small} alt={el.alt_description} />
-          </li>
+            <ImageCard data={element} />
+          </motion.li>
         ))}
-      </ul>
-      {page !== total && <LoadMoreBtn heandleClick={handleLoadMore} />}
-    </>
+      </AnimatePresence>
+    </ul>
   );
-}
+};
+
+export default ImageGallery;

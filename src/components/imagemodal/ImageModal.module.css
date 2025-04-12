@@ -1,3 +1,21 @@
-.image {
-  display: block;
+.backdrop {
+  position: relative;
+}
+
+.imageDescriptionWrapper {
+  padding: 10px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.modalImage {
+  max-height: 50%;
+  overflow: hidden;
+}
+
+.accent {
+  font-weight: 700;
 }
