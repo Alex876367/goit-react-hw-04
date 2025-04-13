@@ -1,13 +1,22 @@
-import css from "./ImageCard.module.css";
+import style from "./ImageCard.module.css";
 
-const ImageCard = ({ alt_description, urls, updateModalStateData }) => {
+import { motion } from "framer-motion";
+
+const ImageCard = ({ data }) => {
   return (
-    <div
-      className={css.card}
-      onClick={() => updateModalStateData(urls.regular, alt_description)}
+    <motion.div
+      className={style.imgWrapper}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -50 }}
+      transition={{ duration: 0.4 }}
     >
-      <img className={css.cardImage} src={urls.small} alt={alt_description} />
-    </div>
+      <img
+        className={style.imgGallery}
+        src={data.urls.regular}
+        alt={data.alt_description}
+      />
+    </motion.div>
   );
 };
 
