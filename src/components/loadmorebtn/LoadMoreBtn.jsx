@@ -1,9 +1,11 @@
-import styles from "./LoadMoreBtn.module.css";
+import React from "react";
 
-export default function LoadMoreBtn({ heandleClick }) {
+const LoadMoreBtn = ({ handleLoadMore, isActive }) => {
   return (
-    <button className={styles.button} onClick={heandleClick}>
+    <button onClick={handleLoadMore} type="button" disabled={isActive}>
       Load more
     </button>
   );
-}
+};
+
+export default LoadMoreBtn;

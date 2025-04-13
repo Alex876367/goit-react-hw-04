@@ -1,9 +1,14 @@
-import styles from "./ImageCard.module.css";
+import css from "./ImageCard.module.css";
 
-export default function ImageCard({ src, alt }) {
+const ImageCard = ({ alt_description, urls, updateModalStateData }) => {
   return (
-    <div className={styles.wrapper}>
-      <img className={styles.image} src={src} alt={alt} />
+    <div
+      className={css.card}
+      onClick={() => updateModalStateData(urls.regular, alt_description)}
+    >
+      <img className={css.cardImage} src={urls.small} alt={alt_description} />
     </div>
   );
-}
+};
+
+export default ImageCard;
